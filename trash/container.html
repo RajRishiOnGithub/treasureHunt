@@ -1,0 +1,39 @@
+<?php
+include "conn.php";
+if(isset($_POST["submit"]))
+{
+  $ans=$_POST['answer'];
+  $sql="slect SCORE from detail where ROLL=$_SESSION['sroll'];
+  $result=mysqli_query($conn,$sql);
+  $sql2="select NAME from image where SCORE=$result;
+  $result2=mysqli_query($conn,$sql2);
+  if($ans!=$result2)
+  echo "try again !";
+  else
+  {
+    $result+=1;
+	$sql3="update detail set SCORE=$result where ROLL=$_SESSION['sroll'];
+  }
+
+}
+
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Start Playing</title>
+</head>
+<body>
+<h1>Find one word answer for the given picture :</h1><br><br>
+<img src="media/deepmind.jpg">
+<br/><br/>
+<label for="answer">ANSWER : </label>
+<input type="text" name="answer" id="answer" value="">
+<br/><br/>
+<input type="submit" name="submit" value="submit">
+<input type="submit" name="logout" value="Logout">
+</body>
+</html>

@@ -10,23 +10,22 @@ if(!isset($_SESSION['roll']))
 }	
 
 		$r=$_SESSION['roll'];
-		if(isset($_POST['answer']))
-		$ans=$_POST['answer'];
+		$answer=$_POST["answer"];
 
-		$sql="select SCORE from detail where ROLL=$r";
+		$sql="select * from detail where ROLL=$r";
 		$result=mysqli_query($conn,$sql);
 		$row= mysqli_fetch_array($result);
 		$n=$row['SCORE'];
 		$totalscore=$row['TOTALSCORE'];
 		$totalhit=$row['TOTALHIT'];
 		$hit=$row['HIT'];
-		$qname="select IMGNAME from image where SCORE='$n'";
+		$qname="select * from image where SCORE='$n'";
 		$imgrslt=mysqli_query($conn,$qname);
 		$rowtwo=mysqli_fetch_array($imgrslt);
 		$imgpoint=$rowtwo['IMGPOINT'];
 		$link="media/".$rowtwo['IMGNAME'].".jpg";
 		$_SESSION['link']=$link;
-		if($ans==$rowtwo['IMGNAME']&&isset($_POST['answer'])&&isset($_POST['answer']))
+		if(($answer==$rowtwo['IMGNAME'])&&isset($_POST['answer'])&&isset($_POST['check']))
 		{
 
 			switch($hit){
@@ -67,9 +66,9 @@ if(!isset($_SESSION['roll']))
 			$hit=0;
 
 			$n=$n+1;
-			$sql3="update detail set SCORE=$n,TOTALSCORE=$totalscore,HIT=$hit where ROLL='$r'";
+			$sql3="update detail set SCORE='$n',TOTALSCORE='$totalscore',HIT='$hit' where ROLL='$r'";
 			mysqli_query($conn,$sql3);
-		$qname="select IMGNAME from image where SCORE='$n'";
+		$qname="select * from image where SCORE='$n'";
 		$imgrslt=mysqli_query($conn,$qname);
 		$rowtwo=mysqli_fetch_array($imgrslt);
 		$link="media/".$rowtwo['IMGNAME'].".jpg";
@@ -102,7 +101,7 @@ if(!isset($_SESSION['roll']))
 			}
 		}
 	
-	echo "score is $totalscore";
+	echo "score is : $totalscore";
 	//session_destroy();
 if(isset($_POST['logout']))
 {
@@ -132,7 +131,7 @@ if(isset($_POST['logout']))
 
 <br/><br/>
 <label for="answer">ANSWER : </label>
-<input type="text" name="answer" id="answer">
+<input type="text" name="answer" id="answer"value="">
 <br/><br/>
 <input type="submit" name="check" value="check" > 
 <input type="submit" name="logout" value="Logout" > 

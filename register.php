@@ -38,7 +38,7 @@
   <label for="name">NAME : </label>
   <input type="text" name="name" id="name" required><br><br/>
   <label for="roll">Roll No : </label>
-  <input type="text" name="roll" id="roll" pattern=".{9}" title="Enter ur valid 9 digit roll number"><br><br/>
+  <input type="number" name="roll" id="roll" pattern=".{9}" title="Enter ur valid 9 digit roll number"><br><br/>
   <label for="pass">Password : </label>
   <input type="password" name="pass" id="pass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 5 or more characters"><br><br>
     <label for="cpass">Confirm Password : </label>

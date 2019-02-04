@@ -37,7 +37,7 @@ background-color:#ffffff;
 	$i=1;
 	while($row = mysqli_fetch_array($result))
 	{
-		echo "<tr><td>".$i."</td><td>".$row['NAME']."</td><td>{$row['SCORE']}</td></tr>";
+		echo "<tr><td>".$i."</td><td>".$row['NAME']."</td><td>{$row['TOTALSCORE']}</td></tr>";
 		$i+=1;
 	}
 ?>

@@ -1,5 +1,8 @@
 <?php
 include "conn.php";
+if ( isset ( $_POST['submit'] ) )  {	
+		header('Location: thunt.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -7,7 +10,9 @@ include "conn.php";
 
 <head>
   <meta charset="UTF-8">
-  <title> MINING THE JEWELS</title>
+  <title><Table> MINING THE JEWELS</title>
+  
+  
   
       <link rel="stylesheet" href="css/style.css">
 
@@ -40,6 +45,8 @@ include "conn.php";
 	</tbody>
 </table>
   
+  
+
 </body>
 
 </html>

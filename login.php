@@ -68,14 +68,14 @@ margin-bottom:auto;
     <title>Login</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
-<body background="tile.jpg">
+<body background="bluetile.jpg">
 <div class="container">
-<h1>Login</h1><br/><br/>
+<h1 style="color: yellow">Login</h1><br/><br/>
 <form  method="post" action="">
   <label for="roll" style="color:#fff;font-weight:900;font-size:24px;">Roll No : &nbsp;&nbsp;&nbsp;</label>
   <input type="number" name="roll" id="roll" class="a" pattern=".{9}" title="Enter ur valid 9 digit roll number"><br>
   <label for="pass" style="color:#fff;font-weight:900;font-size:24px;">Password : </label>
-  <input type="password" name="pass" id="pass"class="a" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 5 or more characters"><br>
+  <input type="password" name="pass" id="pass"class="a" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,15}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 5 or more characters"><br>
   <br><br>
   <input class="btn btn-success" type="submit" style="height:50px;width:152px;"name="login" value="login">
 </form>

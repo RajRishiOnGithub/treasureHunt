@@ -10,7 +10,9 @@ if(!isset($_SESSION['roll']))
 }	
 
 		$r=$_SESSION['roll'];
-		$answer=$_POST["answer"];
+		$answer='';
+		if(isset($_POST['answer']))
+		$answer=$_POST['answer'];
 
 		$sql="select * from detail where ROLL=$r";
 		$result=mysqli_query($conn,$sql);
@@ -108,8 +110,13 @@ if(!isset($_SESSION['roll']))
 			}
 		}
 	
-	echo "score is : $totalscore";
+	echo "<h3>SCORE  :</h3>".$totalscore;
 	//session_destroy();
+
+if(isset($_POST['lb']))
+{
+	header("location:leaderboard.php");
+}	
 if($totalhit<$n||$totalhit>3000)
 {
 	$dissql="update detail set DISQ=1 where ROLL='$r'";
@@ -135,24 +142,26 @@ if(isset($_POST['logout']))
 <head>
     <meta charset="UTF-8">
     <title>Start Playing</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
-<body ><!onunload="destroysession()">
+<body background="bluetile.jpg" ><!onunload="destroysession()">
 <h1>Find one word answer for the given picture :</h1><br><br>
 <form method=post action="container2.php">
 <! image code was here >
 
- <img src="<?php 
+ <img style="border: 5px solid white" src="<?php 
     if(isset($_SESSION['link'])||isset($_POST['check']))  
       echo $_SESSION['link'];
 	  unset($_SESSION['link']);
 	  ?> ">
 
 <br/><br/>
-<label for="answer">ANSWER : </label>
-<input type="text" name="answer" id="answer"value="">
+<label style="height: 30px;width: 100px;color: white" for="answer">ANSWER : </label>
+<input type="text" name="answer" id="answer"value="" style="height: 30px;width:400px ">
 <br/><br/>
-<input type="submit" name="check" value="check" > 
-<input type="submit" name="logout" value="Logout" > 
+<input class="btn btn-success" type="submit" style="height:40px;width:100px;"name="check" value="check">
+<input class="btn btn-info" type="submit" style="height:40px;width:100px;"name="lb" value="scoreboard">
+<input class="btn btn-danger" type="submit" style="height: 40px;widows: 100px;" name="logout" value="Logout" > 
 </form>
 </body>
 </html>

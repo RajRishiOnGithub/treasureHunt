@@ -82,27 +82,34 @@ if(!isset($_SESSION['roll']))
 			$totalhit+=1;
 			$sql4="update detail set TOTALHIT=$totalhit,HIT=$hit where ROLL=$r";
 			mysqli_query($conn,$sql4);
-			if($totalhit>3000)
-			{
-				$dissql="update detail set DISQ=1 where ROLL='$r'";
-			    mysqli_query($conn,$dissql);
-				unset($_SESSION['roll']);
-	            unset($_SESSION['link']);
-				session_destroy();
-			    header("location:disql.html");
-		    }
+		    $sql5="select HINT,HINT2 from image where SCORE=$n";
+		    $myhints=mysqli_query($conn,$sql5);
+		    $hints=mysqli_fetch_array($myhints);
+		    $hint=$hints['HINT'];
+		    $hint2=$hints['HINT2'];
 			if($hit>=40)
 			{
-				echo "Your First Hint is : '$hint";
+				echo nl2br("Your First Hint is : $hint\n");
 			}
 			if($hit>=80)
 			{
-				echo "Your Second Hint is : $hint2";
+				echo nl2br("Your Second Hint is : $hint2\n");
 			}
 		}
 	
 	echo "score is : $totalscore";
 	//session_destroy();
+if($totalhit<$n||$totalhit>3000)
+{
+	$dissql="update detail set DISQ=1 where ROLL='$r'";
+	mysqli_query($conn,$dissql);
+	unset($_SESSION['roll']);
+	unset($_SESSION['link']);
+	session_destroy();
+	header("location:disql.html");
+
+}
+
 if(isset($_POST['logout']))
 {
 	unset($_SESSION['roll']);

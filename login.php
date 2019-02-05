@@ -11,7 +11,7 @@ if(isset($_POST["login"]))
 {
 	$r=$_POST['roll'];
 	$p=$_POST['pass'];
-	$sql="select PASS from detail where ROLL='$r'";
+	$sql="select * from detail where ROLL='$r'";
 	$result=mysqli_query($conn,$sql);
 	$row=mysqli_fetch_array($result);
 	if($row['DISQ']==0)
@@ -29,7 +29,11 @@ if(isset($_POST["login"]))
 		}
 	}
 	else
+	{
+		unset($_SESSION['ROLL']);
+		session_destroy();
 		header("location:disql.html");
+	}
 }
 
 ?>
@@ -45,7 +49,7 @@ if(isset($_POST["login"]))
 <h1>Login</h1><br/><br/>
 <form  method="post" action="">
   <label for="roll">Roll No :</label>
-  <input type="text" name="roll" id="roll" pattern=".{9}" title="Enter ur valid 9 digit roll number"><br>
+  <input type="number" name="roll" id="roll" pattern=".{9}" title="Enter ur valid 9 digit roll number"><br>
   <label for="pass">Password : </label>
   <input type="password" name="pass" id="female" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 5 or more characters"><br>
 

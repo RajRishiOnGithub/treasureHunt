@@ -23,44 +23,55 @@ if(!isset($_SESSION['roll']))
 		$imgrslt=mysqli_query($conn,$qname);
 		$rowtwo=mysqli_fetch_array($imgrslt);
 		$imgpoint=$rowtwo['IMGPOINT'];
+		$flagset=$rowtwo['FLAG'];
 		$link="media/".$rowtwo['IMGNAME'].".jpg";
 		$_SESSION['link']=$link;
 		if(($answer==$rowtwo['IMGNAME'])&&isset($_POST['answer'])&&isset($_POST['check']))
 		{
 
-			switch($hit){
-				case $hit>=0&&$hit<=5:
-				 $totalscore=$totalscore+($imgpoint-(0*$imgpoint)/10);
-				 break;
-				case $hit>5&&$hit<=10:
-				 $totalscore=$totalscore+($imgpoint-(1*$imgpoint)/10);
-				 break;
-				case $hit>10&&$hit<=20:
-				 $totalscore=$totalscore+($imgpoint-(2*$imgpoint)/10);
-				 break;
-				case $hit>20&&$hit<=30:
-				 $totalscore=$totalscore+($imgpoint-(3*$imgpoint)/10);
-				 break;
-				case $hit>30&&$hit<=40:
-				 $totalscore=$totalscore+($imgpoint-(4*$imgpoint)/10);
-				 break;
-				case $hit>40&&$hit<=50:
-				 $totalscore=$totalscore+($imgpoint-(5*$imgpoint)/10);
-				 break;
-				case $hit>50&&$hit<=60:
-				 $totalscore=$totalscore+($imgpoint-(6*$imgpoint)/10);
-				 break;
-				case $hit>60&&$hit<=70:
-				 $totalscore=$totalscore+($imgpoint-(7*$imgpoint)/10);
-				 break;
-				case $hit>70&&$hit<=80:
-				 $totalscore=$totalscore+($imgpoint-(8*$imgpoint)/10);
-				 break;
-				case $hit>80&&$hit<=90:
-				 $totalscore=$totalscore+($imgpoint-(9*$imgpoint)/10);
-				 break;
-				 default:
-				 $totalscore=$totalscore;
+			if($flagset==0)
+			{
+				$totalscore=$totalscore+1+$imgpoint;
+				$flagset=1;
+				$sql6="update image set FLAG=1 where SCORE=$n";
+				mysqli_query($conn,$sql6);
+			}
+			else
+			{
+				switch($hit){
+					case $hit>=0&&$hit<=5:
+					 $totalscore=$totalscore+($imgpoint-(0*$imgpoint)/10);
+					 break;
+					case $hit>5&&$hit<=10:
+					 $totalscore=$totalscore+($imgpoint-(1*$imgpoint)/10);
+					 break;
+					case $hit>10&&$hit<=20:
+					 $totalscore=$totalscore+($imgpoint-(2*$imgpoint)/10);
+					 break;
+					case $hit>20&&$hit<=30:
+					 $totalscore=$totalscore+($imgpoint-(3*$imgpoint)/10);
+					 break;
+					case $hit>30&&$hit<=40:
+					 $totalscore=$totalscore+($imgpoint-(4*$imgpoint)/10);
+					 break;
+					case $hit>40&&$hit<=50:
+					 $totalscore=$totalscore+($imgpoint-(5*$imgpoint)/10);
+					 break;
+					case $hit>50&&$hit<=60:
+					 $totalscore=$totalscore+($imgpoint-(6*$imgpoint)/10);
+					 break;
+					case $hit>60&&$hit<=70:
+					 $totalscore=$totalscore+($imgpoint-(7*$imgpoint)/10);
+					 break;
+					case $hit>70&&$hit<=80:
+					 $totalscore=$totalscore+($imgpoint-(8*$imgpoint)/10);
+					 break;
+					case $hit>80&&$hit<=90:
+					 $totalscore=$totalscore+($imgpoint-(9*$imgpoint)/10);
+					 break;
+					 default:
+					 $totalscore=$totalscore;
+				}
 			}
 
 			$hit=0;

@@ -26,27 +26,53 @@
    }
  ?>
  
+
+<style>
+.container{
+	justify-content: center;
+text-align:center;
+margin-top:50px;
+margin-bottom:auto;
+
+}
+.a {
+  width: 30%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 3px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+</style>
+
+
+
+
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Signup</title>
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
-<body>
+<body background="tile.jpg">
+<div class="container">
 <h1>Signup</h1>
 <form method="post" action="">
-  <label for="name">NAME : </label>
-  <input type="text" name="name" id="name" required><br><br/>
-  <label for="roll">Roll No : </label>
-  <input type="number" name="roll" id="roll" pattern=".{9}" title="Enter ur valid 9 digit roll number"><br><br/>
-  <label for="pass">Password : </label>
-  <input type="password" name="pass" id="pass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 5 or more characters"><br><br>
-    <label for="cpass">Confirm Password : </label>
-  <input type="password" name="cpass" id="cpass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 5 or more characters"><br><br><br/>
-  <input type="submit" value="signup" name="signup">
+  <label for="name" style="color:#fff;font-weight:900;font-size:24px;">NAME : </label>
+  <input type="text" name="name" class="a" id="name" required><br><br/>
+  <label for="roll" style="color:#fff;font-weight:900;font-size:24px;">Roll No : </label>
+  <input type="number" name="roll" class="a" id="roll" pattern=".{9}" title="Enter ur valid 9 digit roll number"><br><br/>
+  <label for="pass" style="color:#fff;font-weight:900;font-size:24px;">Password : </label>
+  <input type="password" class="a" name="pass" id="pass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 5 or more characters"><br><br>
+    <label for="cpass" style="color:#fff;font-weight:900;font-size:24px;">Confirm Password : </label>
+  <input type="password" class="a" name="cpass" id="cpass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 5 or more characters"><br><br><br/>
+  <input type="submit" value="signup"style="height:50px;width:152px;" class="btn btn-success" name="signup">
 </form>
 
-
+</div>
 </body>
 </html>
   

@@ -32,7 +32,7 @@ background-color:#ffffff;
 <td style="text-align:center;">SCORE</td>
 </tr>
 <?php 
-	$sql = "SELECT * FROM detail ORDER BY SCORE DESC LIMIT 10";
+	$sql = "SELECT * FROM detail ORDER BY TOTALSCORE DESC LIMIT 10";
 	$result = mysqli_query($conn, $sql);
 	$i=1;
 	while($row = mysqli_fetch_array($result))
@@ -43,7 +43,7 @@ background-color:#ffffff;
 ?>
 </table>
 </br>
-<input class="submit" type="submit" name="submit" value="Back">
+<input class="submit" type="submit" name="submit" value="Refresh" onclick="leaderboard.php">
 </tr>
 </form>
 </body>

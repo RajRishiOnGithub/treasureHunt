@@ -9,9 +9,22 @@ if(isset($_SESSION['roll']))
 }
 if(isset($_POST["login"]))
 {
+
 	$r=$_POST['roll'];
-	$p=$_POST['pass'];
-	$sql="select * from detail where ROLL='$r'";
+	if(!is_numeric($r))
+	{
+		header("location:login.php");
+		echo "! Enter roll number correctly !";
+		exit();
+	}
+	$sql="select * from detail where ROLL=$r";
+	//$sql->bind_param("s",$p);
+	$p=mysqli_real_escape_string($conn,$_POST['pass']);
+	//$p=$_POST['pass'];
+	//$sql->execute();
+	//$result=$sql->get_result();
+	//$row=$sql->fetch_assoc();
+	//echo $row['NAME'];
 	$result=mysqli_query($conn,$sql);
 	$row=mysqli_fetch_array($result);
 	if($row['DISQ']==0)
@@ -34,6 +47,7 @@ if(isset($_POST["login"]))
 		session_destroy();
 		header("location:disql.html");
 	}
+	
 }
 
 ?>

@@ -12,7 +12,7 @@ if(!isset($_SESSION['roll']))
 		$r=$_SESSION['roll'];
 		$answer='';
 		if(isset($_POST['answer']))
-		$answer=$_POST['answer'];
+		$answer=mysqli_real_escape_string($conn,$_POST['answer']);
 
 		$sql="select * from detail where ROLL=$r";
 		$result=mysqli_query($conn,$sql);
@@ -26,9 +26,10 @@ if(!isset($_SESSION['roll']))
 		$rowtwo=mysqli_fetch_array($imgrslt);
 		$imgpoint=$rowtwo['IMGPOINT'];
 		$flagset=$rowtwo['FLAG'];
-		$link="media/".$rowtwo['IMGNAME'].".jpg";
+		$link=$rowtwo['IMGNAME'];
+		//$link="media/".$rowtwo['IMGNAME'].".jpg";
 		$_SESSION['link']=$link;
-		if(($answer==$rowtwo['IMGNAME'])&&isset($_POST['answer'])&&isset($_POST['check']))
+		if(($answer==$rowtwo['ANSWER'])&&isset($_POST['answer'])&&isset($_POST['check']))
 		{
 
 			if($flagset==0)
@@ -79,12 +80,13 @@ if(!isset($_SESSION['roll']))
 			$hit=0;
 
 			$n=$n+1;
-			$sql3="update detail set SCORE='$n',TOTALSCORE='$totalscore',HIT='$hit' where ROLL='$r'";
+			$sql3="update detail set SCORE='$n',TOTALSCORE='$totalscore',HIT='$hit',UT=now() where ROLL='$r'";
 			mysqli_query($conn,$sql3);
 		$qname="select * from image where SCORE='$n'";
 		$imgrslt=mysqli_query($conn,$qname);
 		$rowtwo=mysqli_fetch_array($imgrslt);
-		$link="media/".$rowtwo['IMGNAME'].".jpg";
+		$link=$rowtwo['IMGNAME'];
+		//$link="media/".$rowtwo['IMGNAME'].".jpg";
 		$_SESSION['link']=$link;
 		$hint=$rowtwo['HINT'];
 		$hint2=$rowtwo['HINT2'];
@@ -110,14 +112,15 @@ if(!isset($_SESSION['roll']))
 			}
 		}
 	
-	echo "<h3>SCORE  :</h3>".$totalscore;
+	echo "<h3>SCORE  :</h3><h1>".$totalscore."</h1>";
 	//session_destroy();
-
-if(isset($_POST['lb']))
+if($totalhit>2000)
 {
-	header("location:leaderboard.php");
-}	
-if($totalhit<$n||$totalhit>3000)
+	echo "Danger Zone u only have 1000 hits left";
+}
+
+
+if($totalhit+3<$n||$totalhit>3000)
 {
 	$dissql="update detail set DISQ=1 where ROLL='$r'";
 	mysqli_query($conn,$dissql);
@@ -145,7 +148,7 @@ if(isset($_POST['logout']))
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
 <body background="bluetile.jpg" ><!onunload="destroysession()">
-<h1>Find one word answer for the given picture :</h1><br><br>
+<h1 style="color: white">Find one word answer for the given picture :</h1><br><br>
 <form method=post action="container2.php">
 <! image code was here >
 
@@ -160,7 +163,7 @@ if(isset($_POST['logout']))
 <input type="text" name="answer" id="answer"value="" style="height: 30px;width:400px ">
 <br/><br/>
 <input class="btn btn-success" type="submit" style="height:40px;width:100px;"name="check" value="check">
-<input class="btn btn-info" type="submit" style="height:40px;width:100px;"name="lb" value="scoreboard">
+
 <input class="btn btn-danger" type="submit" style="height: 40px;widows: 100px;" name="logout" value="Logout" > 
 </form>
 </body>

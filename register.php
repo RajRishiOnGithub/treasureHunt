@@ -3,8 +3,14 @@
    include "conn.php";
    if(isset($_POST["signup"]))
    {
-		$name=$_POST["name"];
-		$roll=$_POST["roll"];
+		$name=mysqli_real_escape_string($conn,$_POST["name"]);
+		$roll=mysqli_real_escape_string($conn,$_POST["roll"]);
+		if(!is_numeric($roll)||strlen($roll)!=9)
+		{
+			header("location:register.php");
+			echo "enter correctly";
+			exit();
+		}
 		$password=$_POST["pass"];
 		$cpassword=$_POST["cpass"];
 		

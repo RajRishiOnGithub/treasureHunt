@@ -10,8 +10,8 @@ if(isset($_SESSION['roll']))
 if(isset($_POST["login"]))
 {
 
-	$r=$_POST['roll'];
-	if(!is_numeric($r))
+	$r=mysqli_real_escape_string($conn,$_POST['roll']);
+	if(!is_numeric($r)||strlen($r)!=9)
 	{
 		header("location:login.php");
 		echo "! Enter roll number correctly !";

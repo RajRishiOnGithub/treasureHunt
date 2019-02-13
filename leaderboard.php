@@ -28,7 +28,7 @@ include "conn.php";
 	</thead>
 	<tbody>
 	<?php 
-	$sql = "SELECT * FROM detail ORDER BY TOTALSCORE DESC LIMIT 10";
+	$sql = "SELECT * FROM detail ORDER BY TOTALSCORE DESC,UT ASC LIMIT 10";
 	$result = mysqli_query($conn, $sql);
 	$i=1;
 	while($row = mysqli_fetch_array($result))

@@ -20,11 +20,33 @@ if(!isset($_SESSION['roll']))
 		$n=$row['SCORE'];
 		$totalscore=$row['TOTALSCORE'];
 ?>
+
+
+<style type="text/css">
+	.font1{
+		font-style: italic;
+		color: #00ff00;
+	}
+	.font2{
+		font-style: italic;
+		color: #ffff00;
+	}
+	.font3{
+		font-style: italic;
+		color: #ff0000;
+	}
+	.scorefont{
+		font-family: 'Allerta Stencil';
+	}
+
+</style>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Start Playing</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Allerta Stencil' rel='stylesheet'>
 </head>
  <body background="bluetile.jpg" ><!onunload="destroysession()">
 
@@ -32,9 +54,28 @@ if(!isset($_SESSION['roll']))
 <! image code was here >
 <br><br>
 <div >
- <div style="float: right; color: white; margin-right: 5%;"> <?php
- echo "<h3>SCORE  :".$totalscore."</h3>";
-	   ?></div>
+ <div style="float: right; color: white; margin-right: 5%;"> 
+ <h3 class="scorefont">SCORE  :<?php echo $totalscore; ?></h3>
+ <?php
+ if($n<=10)
+ {
+ ?>
+ 	<p><h3 class="scorefont">LEVEL :</h3><h5 class="font1" >EASY</h5></p>
+<?php
+ }
+if($n>10&&$n<=50)
+ {
+ ?>
+ 	<h3 class="scorefont">LEVEL :<h5 class="font2" >MEDIUM</h5></h3>
+<?php
+ }
+ if($n>50&&$n<=100)
+ {
+ ?>
+ 	<h3 class="scorefont">LEVEL :<h5 class="font3" >HARD</h5></h3>
+<?php
+ }
+	?></div>
  
 
 <?php
@@ -53,7 +94,7 @@ if(!isset($_SESSION['roll']))
 
 ?>
 
-<img style="border: 5px solid white; margin-left: 20%;"  
+<img style="border: 5px solid white; margin-left: 22%;height: 422px;width:728px;"  
  src="<?php
       echo $link;
    ?>
@@ -63,7 +104,7 @@ if(!isset($_SESSION['roll']))
 <br/><br/>
 <div style="margin-left: 350px;">
 <label style="height: 30px;width: 100px;color: white" for="answer">ANSWER : </label>
-<input type="text" name="answer" id="answer"value="" style="height: 30px;width:400px "></div>
+<input type="text" name="answer" id="answer"value="" style="height: 30px;width:400px ;"></div>
 <br/>
 <div style="margin-left: 500px;">
 <input class="btn btn-success" type="submit" style="height:40px;width:100px;"name="check" value="check">
@@ -77,11 +118,12 @@ if(!isset($_SESSION['roll']))
 		if(($answer==$rowtwo['ANSWER'])&&isset($_POST['answer'])&&isset($_POST['check']))
 		{
 
-			if($flagset==0)
+			if($flagset<5)
 			{
-				$totalscore=$totalscore+2+$imgpoint;
-				$flagset=1;
-				$sql6="update image set FLAG=1 where SCORE=$n";
+				$totalscore=$totalscore+$imgpoint+1;
+				$flagset+=1;
+				$imgpoint-=1;
+				$sql6="update image set IMGPOINT='$imgpoint',FLAG='$flagset' where SCORE='$n'";
 				mysqli_query($conn,$sql6);
 			}
 			else
@@ -153,11 +195,11 @@ if(!isset($_SESSION['roll']))
 			{
 				echo "Danger Zone u only have 2000 hits left";
 			}
-			if($hit>=400)
+			if($hit>=100)
 			{
-				 ?><div style="background-color: white; font-size: 40px; text-align: center;" > Your First Hint is : <?php  echo $hint;  ?> </div> <?php
+				 ?><div style="background-color: white;  font-size: 40px; text-align: center;" >First Hint: <?php  echo $hint;  ?> </div> <?php
 			}
-			if($hit>=800)
+			if($hit>=200)
 			{
 				?><div style="background-color: white; font-size: 40px; text-align: center;" > Second Hint : <?php  echo  
 				$hint2;  ?> </div> <?php

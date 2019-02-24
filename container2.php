@@ -57,13 +57,13 @@ if(!isset($_SESSION['roll']))
  <div style="float: right; color: white; margin-right: 5%;"> 
  <h3 class="scorefont">SCORE  :<?php echo $totalscore; ?></h3>
  <?php
- if($n<=10)
+ if($n<=20)
  {
  ?>
  	<p><h3 class="scorefont">LEVEL :</h3><h5 class="font1" >EASY</h5></p>
 <?php
  }
-if($n>10&&$n<=50)
+if($n>20&&$n<=50)
  {
  ?>
  	<h3 class="scorefont">LEVEL :<h5 class="font2" >MEDIUM</h5></h3>
@@ -193,7 +193,7 @@ if($n>10&&$n<=50)
 	//session_destroy();
 			if($totalhit>4000)
 			{
-				echo "Danger Zone u only have 2000 hits left";
+				 ?><h1 style="color: red;">Danger Zone u only have 2000 hits left</h1> <?php 
 			}
 			if($hit>=100)
 			{
@@ -209,7 +209,7 @@ if($n>10&&$n<=50)
 	
 
 
-if($totalhit+4<$n||$totalhit>6000)
+if($totalhit<$n||$totalhit>8000)
 {
 	$dissql="update detail set DISQ=1 where ROLL='$r'";
 	mysqli_query($conn,$dissql);
